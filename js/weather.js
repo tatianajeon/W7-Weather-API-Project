@@ -1,74 +1,3 @@
-// let weather = {
-//     apikey: 'f1101d0fcac884b61b93d278869b946c',
-
-//     getWeather: function(zip){
-//         fetch('https://api.openweathermap.org/data/2.5/weather?zip=' + zip + ',us&units=imperial&appid=' + this.apikey)
-//             .then((response) => response.json())
-//             .then((data) => this.displayWeather(data));
-//     },
-    
-//     displayWeather: function(data){
-//         const { name } = data;
-//         const { icon, description } = data.weather[0];
-//         const { temp, humidity } = data.main;
-//         document.querySelector('.cityName').innerText = name;
-//         document.querySelector('.icon').src="http://openweathermap.org/img/wn/" + icon + "@2x.png";
-//         document.querySelector('.temp').innerText = temp + '°F';
-//         document.querySelector('.description').innerText = description;
-//         document.querySelector('.humidity').innerText = 'Humidity | ' + humidity + '%';
-//     },
-      
-
-
-//     getForecast: async function(zip){
-//         await fetch('https://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',us&units=imperial&appid=' + this.apikey)
-//         .then((response) => response.json())
-//         .then((data) => { 
-//             for(i = 8; i < (data.list.length/5); i += 8){
-//                 document.getElementsByClassName("lowTemp" + (i).toString()).innerHTML = "Min: " + data.list[i].main.temp_min + '°F';
-//             }
-//             for(i = 0; i< data.list.length; i += 8){
-//                 document.getElementsByClassName("highTemp" + (i).toString()).innerHTML = "Max: " + data.list[i].main.temp_max + '°F';
-//             }
-//             for(i = 0; i< data.list.length; i += 8){
-//                 document.getElementsByClassName("icon" + (i).toString()).src="http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png";
-//             }   
-//             for(i = 0; i< data.list.length; i += 8){
-//                 document.getElementsByClassName("humidity" + (i).toString()).innerHTML = "Humidity: " + data.list[i].main.humidity + "@2x.png";
-//             }
-//         }) 
-//         .catch(error => alert("Something Went Wrong"))   
-//     },
-
-    
-//     checkDay: function(day){
-//         const d = new Date();
-//         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-//         for(i = 0; i<5; i++){
-//             document.getElementById(".day" + (i)).innerHTML = weekday[checkDay(i)];
-//           }
-//         if(day + d.getDay() > 6){
-//             return day + d.getDay() - 7;
-//         }
-//         else{
-//             return day + d.getDay();
-//     }},
-
-//     search: function () {
-//         this.getWeather(document.querySelector(".search-bar").value);}
-// };
-
-// document.querySelector(".search button").addEventListener("click", function(){weather.search();
-// });
-
-
-// https://api.openweathermap.org/data/2.5/weather?zip=37207,us&units=imperial&appid=f1101d0fcac884b61b93d278869b946c
-// https://api.openweathermap.org/data/2.5/forecast?zip=37207,us&units=imperial&appid=f1101d0fcac884b61b93d278869b946c
-
-
-
-
-
 let weather;
 
 
@@ -89,7 +18,7 @@ let displayWeather = async (data) => {
     const { temp_max } = await data.main;
     const { humidity } = await data.main;
 
-    document.querySelector('.cityName').innerText = name;
+    document.querySelector('.cityName').innerText = name; 
     document.querySelector('.icon').src="http://openweathermap.org/img/wn/" + icon + "@2x.png";
     document.querySelector('.temp').innerText = temp + '°F';
     document.querySelector('.highTemp').innerText = temp_max + '°F';
@@ -97,7 +26,90 @@ let displayWeather = async (data) => {
     document.querySelector('.description').innerText = description;
     document.querySelector('.humidity').innerText = 'Humidity | ' + humidity + '%';
 }
+
+
+let search = async () => {
+    let weatherData = await (getData(document.querySelector(".search-bar").value));
+    displayWeather(weatherData)
+    getFive(weatherData)
+}
+
+
+const weatherMap = async ()
+
+
+
+
+
+// let weather = {
+//     apikey: 'f1101d0fcac884b61b93d278869b946c',    
+
+//     getWeather: function(zip){
+//         fetch('https://api.openweathermap.org/data/2.5/weather?zip=' + zip + ',us&units=imperial&appid=' + this.apikey)    
+//             .then((response) => response.json())
+//             .then((data) => this.displayWeather(data));
+//     },
+    
+//     displayWeather: function(data){
+//         const { name } = data;    
+//         const { icon, description } = data.weather[0];
+//         const { temp, humidity } = data.main;
+//         document.querySelector('.cityName').innerText = name;
+//         document.querySelector('.icon').src="http://openweathermap.org/img/wn/" + icon + "@2x.png";
+//         document.querySelector('.temp').innerText = temp + '°F';
+//         document.querySelector('.description').innerText = description;
+//         document.querySelector('.humidity').innerText = 'Humidity | ' + humidity + '%';
+//     },
       
+
+
+//     getForecast: async function(zip){
+//         await fetch('https://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',us&units=imperial&appid=' + this.apikey)    
+//         .then((response) => response.json())
+//         .then((data) => { 
+//             for(i = 8; i < (data.list.length/5); i += 8){
+//                 document.getElementsByClassName("lowTemp" + (i).toString()).innerHTML = "Min: " + data.list[i].main.temp_min + '°F';    
+//             }
+//             for(i = 0; i< data.list.length; i += 8){
+//                 document.getElementsByClassName("highTemp" + (i).toString()).innerHTML = "Max: " + data.list[i].main.temp_max + '°F';    
+//             }
+//             for(i = 0; i< data.list.length; i += 8){
+//                 document.getElementsByClassName("icon" + (i).toString()).src="http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png";    
+//             }   
+//             for(i = 0; i< data.list.length; i += 8){
+//                 document.getElementsByClassName("humidity" + (i).toString()).innerHTML = "Humidity: " + data.list[i].main.humidity + "@2x.png";    
+//             }
+//         }) 
+//         .catch(error => alert("Something Went Wrong"))   
+//     },
+
+    
+//     checkDay: function(day){
+//         const d = new Date();    
+//         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+//         for(i = 0; i<5; i++){
+//             document.getElementById(".day" + (i)).innerHTML = weekday[checkDay(i)];    
+//           }
+//         if(day + d.getDay() > 6){
+//             return day + d.getDay() - 7;    
+//         }
+//         else{
+//             return day + d.getDay();    
+//     }},
+
+//     search: function () {
+//         this.getWeather(document.querySelector(".search-bar").value);}    
+// };
+
+// document.querySelector(".search button").addEventListener("click", function(){weather.search();
+// });
+
+
+// https://api.openweathermap.org/data/2.5/weather?zip=37207,us&units=imperial&appid=f1101d0fcac884b61b93d278869b946c
+// https://api.openweathermap.org/data/2.5/forecast?zip=37207,us&units=imperial&appid=f1101d0fcac884b61b93d278869b946c
+
+
+
 
 // const getForecast = async (zip) => {
 //     const result = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zip},us&units=imperial&appid=${apikey}`)
@@ -109,7 +121,7 @@ let displayWeather = async (data) => {
 //     let data = await forecastData
 //     let weatherList = await data.list
 //     return weatherList
-    
+
 // } 
 
 // let getFive = async (weatherList) => {
@@ -123,7 +135,7 @@ let displayWeather = async (data) => {
 //     }
 // }
 
-    
+
 // let checkDay = async (day) => {
 //         const d = new Date();
 //         const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -136,11 +148,3 @@ let displayWeather = async (data) => {
 //         else{
 //             return day + d.getDay();
 // }}
-
-
-let search = async () => {
-    let weatherData = await (getData(document.querySelector(".search-bar").value));
-    displayWeather(weatherData)
-    getFive(weatherData)
-}
-

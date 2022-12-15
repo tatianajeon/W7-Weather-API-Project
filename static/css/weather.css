@@ -6,7 +6,7 @@ body{
     margin: 0;
     flex-direction: column;
     background-size:cover;
-    background-image: linear-gradient(to bottom, transparent, #eee), url('/weather_API/static/images/umbrella-bright.jpg'); 
+    background-image: linear-gradient(to bottom, transparent, #eee), url('/static/images/umbrella-bright.jpg'); 
     background-repeat: no-repeat;
 
 }
